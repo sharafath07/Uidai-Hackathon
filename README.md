@@ -1,118 +1,162 @@
-# 📌 Where & When: Optimizing Aadhaar Enrolment and Update Services
+# Where & When: Optimizing Aadhaar Enrolment and Update Services
 
-**Hackathon:** UIDAI Data Hackathon 2026  
-**Problem Owner:** Unique Identification Authority of India (UIDAI)
+## UIDAI Data Hackathon 2026
 
 ## 👥 Team Members
-- **Sharafath Ahammed V**
-- **Hanan Hafees Mohammed**
-- **Anagha P**
-- **Marzook KK**
+- [Sharafath Ahammed V](https://github.com/sharafath07)
+- [Hanan Hafees Mohammed](https://github.com/hananhafees09)
+- [Anagha P](https://github.com/anaghapraveen2007)
+- [Marzook KK](https://github.com/marzook771)
 
-🔗 **GitHub Repository:**  
+
+GitHub Repository:  
 https://github.com/sharafath07/Uidai-Hackathon
 
 ---
 
-## 🧠 Problem Overview
+## 📌 Project Overview
 
-Aadhaar enrolment and biometric update centres experience **uneven service demand across regions and seasons**.  
-Certain regions face **large biometric update backlogs**, while specific months see **sudden demand spikes** that lead to long queues and system overload. At the same time, low-demand periods cause underutilization of resources.
+Aadhaar enrolment and biometric update centres experience uneven service demand across regions and seasons.  
+Some regions face persistent biometric update backlogs, while specific months experience sudden demand spikes that overload infrastructure.  
 
-Due to the absence of data-driven planning, authorities often respond **reactively rather than proactively**.
+This project applies **statistical and time-series analysis** to answer two key questions:
 
----
+- **WHERE** do Aadhaar service gaps exist?
+- **WHEN** does demand peak?
 
-## 🎯 Project Objective
-
-This project answers two critical questions:
-
-- **WHERE** do biometric update gaps exist?
-- **WHEN** does Aadhaar service demand peak?
-
-By combining **regional (spatial)** and **seasonal (temporal)** analysis, the project enables **efficient resource allocation** and smoother Aadhaar service delivery.
+By combining both dimensions into a **Priority Score**, the system enables proactive resource allocation, staff planning, and improved service delivery.
 
 ---
 
-## 📊 Core Ideas
+## 🎯 Objectives
 
-### 1️⃣ Regional Update Gaps (WHERE)
-
-We calculate the biometric update gap using:
-
-Update Gap = Eligible Population (5–17) − Updates Completed
-
-
-Regions with large negative gaps indicate persistent biometric update backlogs.
+- Identify regions with high biometric update backlogs  
+- Detect busy and slow months using workload analysis  
+- Detect unusual demand spikes  
+- Forecast short-term workload trends  
+- Combine spatial and temporal pressure into a Priority Score  
 
 ---
 
-### 2️⃣ Seasonal Workload Analysis (WHEN)
+## 📂 Dataset Requirements (IMPORTANT)
 
-Monthly enrolment and biometric update data is analyzed to identify:
-- Busy months
-- Slow months
-- Sudden demand spikes
-- Seasonal workload patterns
+To run the analysis successfully, **all CSV files must be saved inside a folder named `data/`**  
+and **the filenames must be exactly as listed below**:
 
----
+### Aadhaar Enrolment Files
 
-### 3️⃣ Priority Score (WHERE + WHEN)
+api_data_aadhar_enrolment_1.csv
+api_data_aadhar_enrolment_2.csv
+api_data_aadhar_enrolment_3.csv
 
-A **Priority Score** is computed by combining:
-- Normalized regional update gaps
-- Normalized monthly workload intensity
 
-High scores indicate **regions that require urgent intervention during critical months**.
+### Aadhaar Biometric Update Files
 
----
+api_data_aadhar_biometric_1.csv
+api_data_aadhar_biometric_2.csv
+api_data_aadhar_biometric_3.csv
 
-## 🛠️ Methodology
 
-1. Load and merge multiple UIDAI CSV datasets  
-2. Clean and standardize dates, states, districts, and pincodes  
-3. Compute:
-   - Regional update gaps
-   - Monthly workload
-   - 3-month moving average
-   - Seasonal index  
-4. Detect unusual demand spikes using statistical thresholds  
-5. Generate priority scores and ranked outputs  
+⚠️ **Do not rename the files**  
+⚠️ **Do not move them outside the `data/` folder**
+
+The analysis code automatically loads and merges these files based on the above names.
 
 ---
 
-## 📈 Outputs
+## 📁 Recommended Folder Structure
 
-### 📂 Generated CSV Files
-- `state_update_gap.csv`
-- `monthly_workload_analysis.csv`
-- `priority_districts.csv`
+Uidai-Hackathon/
+│
+├── data/
+│ ├── api_data_aadhar_enrolment_1.csv
+│ ├── api_data_aadhar_enrolment_2.csv
+│ ├── api_data_aadhar_enrolment_3.csv
+│ ├── api_data_aadhar_biometric_1.csv
+│ ├── api_data_aadhar_biometric_2.csv
+│ └── api_data_aadhar_biometric_3.csv
+│
+├── output/
+│ ├── charts/
+│ └── csv/
+│
+├── run_analysis.py
+├── requirements.txt
+└── README.md
 
-### 🖼️ Generated Visualizations (PNG)
-- Regional biometric update gap (bar chart)
-- Monthly Aadhaar workload trend
-- Busy vs slow months (pie chart)
-- Unusual demand spikes
-- 3-month moving average
-- Seasonal index
-- High-priority districts
-
-All outputs are saved inside the `/output` directory.
-
----
-
-## 🧪 Tech Stack
-
-- **Python**
-- **Pandas**
-- **NumPy**
-- **Matplotlib**
-- **Seaborn**
 
 ---
 
-## ▶️ How to Run the Project
+## ⚙️ How to Run the Project
 
+1. Install dependencies:
 ```bash
-pip install pandas numpy matplotlib seaborn
-python run_analysis.py
+   pip install -r requirements.txt 
+```
+
+2. Ensure all CSV files are placed correctly inside the data/ folder.
+
+3. Run the analysis:
+```bash
+   python run_analysis.py
+```
+
+## 📊 Outputs Generated
+
+The script automatically generates:
+
+## 📈 Visual Outputs (saved as PNG)
+
+- Regional update gap bar charts
+
+- Busy vs slow month pie chart
+
+- Monthly workload trend line
+
+- Unusual demand spike detection
+
+- 3-month moving average plot
+
+- Seasonal index bar chart
+
+- Quadrant of Neglect scatter plot
+
+- Top high-risk states and districts
+
+All images are saved in:
+```bash
+   output/charts/
+```
+
+## 📄 CSV Outputs
+
+- State-wise update gap analysis
+
+- Monthly workload summary
+
+- Priority-ranked districts
+
+Saved in:
+```bash
+   output/csv/
+``` 
+## 🔍 Methodology Summary
+
+- Update Gap = Eligible Population − Updates Completed
+
+- Monthly Workload = Enrolments + Biometric Updates
+
+- Seasonal Index = Monthly Workload / Average Workload
+
+- Priority Score = Normalized Update Gap + Normalized Monthly Load
+
+This ensures decisions are based on both geography and seasonality, not either in isolation.
+
+## 📄 Final Report
+
+A detailed PDF report including explanations, equations, insights, and visual outputs is included in the repository.
+
+## 🏁 Conclusion
+
+This project transforms raw Aadhaar transaction data into actionable intelligence.
+By identifying where service backlogs exist and when system pressure peaks, UIDAI can deploy targeted, timely interventions to ensure smoother Aadhaar service delivery.
